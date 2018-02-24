@@ -37,7 +37,7 @@ class AccountHeaderView : UIView, GradientDrawable, Subscriber {
     private let manage = UIButton(type: .system)
     private let primaryBalance: UpdatingLabel
     private let secondaryBalance: UpdatingLabel
-    private let currencyTapView = UIView()
+    private let currencyTapPressView = UIView()
     private let store: Store
     private let equals = UILabel(font: .customBody(size: smallFontSize), color: .whiteTint)
     private var regularConstraints: [NSLayoutConstraint] = []
@@ -131,7 +131,7 @@ class AccountHeaderView : UIView, GradientDrawable, Subscriber {
         addSubview(primaryBalance)
         addSubview(secondaryBalance)
         addSubview(search)
-        addSubview(currencyTapView)
+        addSubview(currencyTapPressView)
         addSubview(equals)
         addSubview(logo)
         addSubview(modeLabel)
@@ -177,14 +177,17 @@ class AccountHeaderView : UIView, GradientDrawable, Subscriber {
             search.constraint(.height, constant: 44.0) ])
         search.imageEdgeInsets = UIEdgeInsetsMake(8.0, 8.0, 8.0, 8.0)
 
-        currencyTapView.constrain([
-            currencyTapView.leadingAnchor.constraint(equalTo: name.leadingAnchor, constant: -C.padding[1]),
-            currencyTapView.trailingAnchor.constraint(equalTo: manage.leadingAnchor, constant: C.padding[1]),
-            currencyTapView.topAnchor.constraint(equalTo: primaryBalance.topAnchor, constant: -C.padding[1]),
-            currencyTapView.bottomAnchor.constraint(equalTo: primaryBalance.bottomAnchor, constant: C.padding[1]) ])
+        currencyTapPressView.constrain([
+            currencyTapPressView.leadingAnchor.constraint(equalTo: name.leadingAnchor, constant: -C.padding[1]),
+            currencyTapPressView.trailingAnchor.constraint(equalTo: manage.leadingAnchor, constant: C.padding[1]),
+            currencyTapPressView.topAnchor.constraint(equalTo: primaryBalance.topAnchor, constant: -C.padding[1]),
+            currencyTapPressView.bottomAnchor.constraint(equalTo: primaryBalance.bottomAnchor, constant: C.padding[1]) ])
 
-        let gr = UITapGestureRecognizer(target: self, action: #selector(currencySwitchTapped))
-        currencyTapView.addGestureRecognizer(gr)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(currencySwitchTapped))
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(currencySwitchLongPressed))
+        longPressGesture.minimumPressDuration = 1.0
+        currencyTapPressView.addGestureRecognizer(tapGesture)
+        currencyTapPressView.addGestureRecognizer(longPressGesture)
 
         logo.constrain([
             logo.leadingAnchor.constraint(equalTo: leadingAnchor, constant: C.padding[2]),
@@ -318,6 +321,8 @@ class AccountHeaderView : UIView, GradientDrawable, Subscriber {
     }
 
     @objc private func currencySwitchTapped() {
+        
+        
         layoutIfNeeded()
         UIView.spring(0.7, animations: {
             self.primaryBalance.transform = self.primaryBalance.transform.isIdentity ? self.transform(forView: self.primaryBalance) : .identity
@@ -328,6 +333,10 @@ class AccountHeaderView : UIView, GradientDrawable, Subscriber {
         }) { _ in }
 
         self.store.perform(action: CurrencyChange.toggle())
+    }
+    
+    @objc private func currencySwitchLongPressed() {
+
     }
 
     required init?(coder aDecoder: NSCoder) {
