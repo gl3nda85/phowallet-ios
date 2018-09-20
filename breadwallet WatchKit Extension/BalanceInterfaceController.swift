@@ -25,12 +25,12 @@ class BalanceInterfaceController: WKInterfaceController {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(BalanceInterfaceController.update), name: .ApplicationDataDidUpdateNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateA), name: .ApplicationDataDidUpdateNotification, object: nil)
 
-        update()
+        updateA()
     }
 
-    @objc func update() {
+    @objc private func updateA() {
         if let data = WatchDataManager.shared.data {
             loadingIndicator.setHidden(true)
 

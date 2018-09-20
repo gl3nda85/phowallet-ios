@@ -362,13 +362,13 @@ extension WalletManager : WalletAuthenticator {
             guard SecRandomCopyBytes(kSecRandomDefault, MemoryLayout<UInt128>.size, entropyRef) == 0
                 else { return nil }
             let phraseLen = BRBIP39Encode(nil, 0, &words, entropyRef, MemoryLayout<UInt128>.size)
-            var phraseData = CFDataCreateMutable(secureAllocator, phraseLen) as Data
-            phraseData.count = phraseLen
-            guard phraseData.withUnsafeMutableBytes({
-                BRBIP39Encode($0, phraseData.count, &words, entropyRef, MemoryLayout<UInt128>.size)
-            }) == phraseData.count else { return nil }
+            let phraseData = CFDataCreateMutable(secureAllocator, phraseLen) as Data
+            var localPhraseData = phraseData
+            guard localPhraseData.withUnsafeMutableBytes({
+                BRBIP39Encode($0, phraseLen, &words, entropyRef, MemoryLayout<UInt128>.size)
+            }) == phraseLen else { return nil }
             entropy = UInt128()
-            let phrase = CFStringCreateFromExternalRepresentation(secureAllocator, phraseData as CFData,
+            let phrase = CFStringCreateFromExternalRepresentation(secureAllocator, localPhraseData as CFData,
                                                                   CFStringBuiltInEncodings.UTF8.rawValue) as String
             guard setSeedPhrase(phrase) else { return nil }
             return phrase

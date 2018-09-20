@@ -158,8 +158,7 @@ extension BRKey {
         return autoreleasepool { // wrapping in autoreleasepool ensures sensitive memory is wiped and freed immediately
             let count = BRKeyPrivKey(&self, nil, 0)
             var data = CFDataCreateMutable(secureAllocator, count) as Data
-            data.count = count
-            guard data.withUnsafeMutableBytes({ BRKeyPrivKey(&self, $0, data.count) }) != 0 else { return nil }
+            guard data.withUnsafeMutableBytes({ BRKeyPrivKey(&self, $0, count) }) != 0 else { return nil }
             return CFStringCreateFromExternalRepresentation(secureAllocator, data as CFData,
                                                             CFStringBuiltInEncodings.UTF8.rawValue) as String
         }
@@ -173,8 +172,7 @@ extension BRKey {
             CFStringNormalize(nfcPhrase, .C) // NFC unicode normalization
             let count = BRKeyBIP38Key(&self, nil, 0, nfcPhrase as String)
             var data = CFDataCreateMutable(secureAllocator, count) as Data
-            data.count = count
-            guard data.withUnsafeMutableBytes({ BRKeyBIP38Key(&self, $0, data.count, nfcPhrase as String) }) != 0
+            guard data.withUnsafeMutableBytes({ BRKeyBIP38Key(&self, $0, count, nfcPhrase as String) }) != 0
                 else { return nil }
             return CFStringCreateFromExternalRepresentation(secureAllocator, data as CFData,
                                                             CFStringBuiltInEncodings.UTF8.rawValue) as String
