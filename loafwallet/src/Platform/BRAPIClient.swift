@@ -232,77 +232,78 @@ open class BRAPIClient : NSObject, URLSessionDelegate, URLSessionTaskDelegate, B
     }
     
     // retrieve a token and save it in the keychain data for this account
-    private func getToken(_ handler: @escaping (NSError?) -> Void) {
-        if isFetchingAuth {
-            log("already fetching auth, waiting...")
-            authFetchGroup.notify(queue: DispatchQueue.main) {
-                handler(nil)
-            }
-            return
-        }
-        guard let authKey = authKey else {
-            return handler(NSError(domain: BRAPIClientErrorDomain, code: 500, userInfo: [
-                NSLocalizedDescriptionKey: S.ApiClient.notReady]))
-        }
-        let authPubKey = authKey.publicKey
-        isFetchingAuth = true
-        log("auth: entering group")
-        authFetchGroup.enter()
-        var req = URLRequest(url: url("/token"))
-        req.httpMethod = "POST"
-        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        req.setValue("application/json", forHTTPHeaderField: "Accept")
-        let reqJson = [
-            "pubKey": authPubKey.base58,
-            "deviceID": deviceId
-        ]
-        do {
-            let dat = try JSONSerialization.data(withJSONObject: reqJson, options: [])
-            req.httpBody = dat
-        } catch let e {
-            log("JSON Serialization error \(e)")
-            isFetchingAuth = false
-            authFetchGroup.leave()
-            return handler(NSError(domain: BRAPIClientErrorDomain, code: 500, userInfo: [
-                NSLocalizedDescriptionKey: S.ApiClient.jsonError]))
-        }
-        session.dataTask(with: req, completionHandler: { (data, resp, err) in
-            DispatchQueue.main.async {
-                if let httpResp = resp as? HTTPURLResponse {
-                    // unsuccessful response from the server
-                    if httpResp.statusCode != 200 {
-                        if let data = data, let s = String(data: data, encoding: .utf8) {
-                            self.log("Token error: \(s)")
-                        }
-                        self.isFetchingAuth = false
-                        self.authFetchGroup.leave()
-                        return handler(NSError(domain: BRAPIClientErrorDomain, code: httpResp.statusCode, userInfo: [
-                            NSLocalizedDescriptionKey: S.ApiClient.tokenError]))
-                    }
-                }
-                if let data = data {
-                    do {
-                        let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                        self.log("POST /token json response: \(json)")
-                        if let topObj = json as? [String: Any],
-                            let tok = topObj["token"] as? String,
-                            let uid = topObj["userID"] as? String {
-                            // success! store it in the keychain
-                            var kcData = self.authenticator.userAccount ?? [AnyHashable: Any]()
-                            kcData["token"] = tok
-                            kcData["userID"] = uid
-                            self.authenticator.userAccount = kcData
-                        }
-                    } catch let e {
-                        self.log("JSON Deserialization error \(e)")
-                    }
-                }
-                self.isFetchingAuth = false
-                self.authFetchGroup.leave()
-                handler(err as NSError?)
-            }
-        }) .resume()
-    }
+    private func getToken(_ handler: @escaping (NSError?) -> Void) {}
+//    private func getToken(_ handler: @escaping (NSError?) -> Void) {
+//        if isFetchingAuth {
+//            log("already fetching auth, waiting...")
+//            authFetchGroup.notify(queue: DispatchQueue.main) {
+//                handler(nil)
+//            }
+//            return
+//        }
+//        guard let authKey = authKey else {
+//            return handler(NSError(domain: BRAPIClientErrorDomain, code: 500, userInfo: [
+//                NSLocalizedDescriptionKey: S.ApiClient.notReady]))
+//        }
+//        let authPubKey = authKey.publicKey
+//        isFetchingAuth = true
+//        log("auth: entering group")
+//        authFetchGroup.enter()
+//        var req = URLRequest(url: url("/token"))
+//        req.httpMethod = "POST"
+//        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//        req.setValue("application/json", forHTTPHeaderField: "Accept")
+//        let reqJson = [
+//            "pubKey": authPubKey.base58,
+//            "deviceID": deviceId
+//        ]
+//        do {
+//            let dat = try JSONSerialization.data(withJSONObject: reqJson, options: [])
+//            req.httpBody = dat
+//        } catch let e {
+//            log("JSON Serialization error \(e)")
+//            isFetchingAuth = false
+//            authFetchGroup.leave()
+//            return handler(NSError(domain: BRAPIClientErrorDomain, code: 500, userInfo: [
+//                NSLocalizedDescriptionKey: S.ApiClient.jsonError]))
+//        }
+//        session.dataTask(with: req, completionHandler: { (data, resp, err) in
+//            DispatchQueue.main.async {
+//                if let httpResp = resp as? HTTPURLResponse {
+//                    // unsuccessful response from the server
+//                    if httpResp.statusCode != 200 {
+//                        if let data = data, let s = String(data: data, encoding: .utf8) {
+//                            self.log("Token error: \(s)")
+//                        }
+//                        self.isFetchingAuth = false
+//                        self.authFetchGroup.leave()
+//                        return handler(NSError(domain: BRAPIClientErrorDomain, code: httpResp.statusCode, userInfo: [
+//                            NSLocalizedDescriptionKey: S.ApiClient.tokenError]))
+//                    }
+//                }
+//                if let data = data {
+//                    do {
+//                        let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+//                        self.log("POST /token json response: \(json)")
+//                        if let topObj = json as? [String: Any],
+//                            let tok = topObj["token"] as? String,
+//                            let uid = topObj["userID"] as? String {
+//                            // success! store it in the keychain
+//                            var kcData = self.authenticator.userAccount ?? [AnyHashable: Any]()
+//                            kcData["token"] = tok
+//                            kcData["userID"] = uid
+//                            self.authenticator.userAccount = kcData
+//                        }
+//                    } catch let e {
+//                        self.log("JSON Deserialization error \(e)")
+//                    }
+//                }
+//                self.isFetchingAuth = false
+//                self.authFetchGroup.leave()
+//                handler(err as NSError?)
+//            }
+//        }) .resume()
+//    }
     
     // MARK: URLSession Delegate
 

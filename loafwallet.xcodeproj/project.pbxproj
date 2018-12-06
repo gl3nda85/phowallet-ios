@@ -1132,6 +1132,7 @@
 		752FB03C1DF8BE4B009086FB /* iphone.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphone.modulemap; sourceTree = "<group>"; };
 		752FB03D1DF8BE4B009086FB /* iphonesim.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphonesim.modulemap; sourceTree = "<group>"; };
 		752FB04A1DF8BE6B009086FB /* sqlite3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = sqlite3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		754207AE21B93D0F00A347CB /* loafwallet-core */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "loafwallet-core"; path = "Modules/loafwallet-core"; sourceTree = "<group>"; };
 		754AE0BB1DFE8A46007FD001 /* BRCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BRCore.swift; path = src/BRCore.swift; sourceTree = "<group>"; };
 		754AE0BD1DFE8E5A007FD001 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = src/Platform/module.modulemap; sourceTree = "<group>"; };
 		75519F331DC7D20500EDF66C /* WalletManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WalletManager.swift; path = src/WalletManager.swift; sourceTree = "<group>"; };
@@ -3377,6 +3378,7 @@
 		75A2A7F11DA5935F00A983D8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				754207AE21B93D0F00A347CB /* loafwallet-core */,
 				24D91D0A2166923E0077A619 /* UserNotifications.framework */,
 				22A9A9671DF61FF8000F0016 /* libbz2.tbd */,
 				1BA74B86206AD60A0083BD2A /* Crashlytics.framework */,
@@ -3885,6 +3887,7 @@
 				1B86CEB22091528B00BCE82E /* Icon Versioning */,
 				1B86CEB32091528B00BCE82E /* Fabric Script */,
 				9126BA99543FFAA0490C7102 /* [CP] Embed Pods Frameworks */,
+				39D64413E88176E0AD7B4D01 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -4037,6 +4040,7 @@
 				CEE0EF531EBF8C8A0018DB36 /* Icon Versioning */,
 				1BA74B89206AD75E0083BD2A /* Fabric Script */,
 				0294FF7F22B6669A3338C627 /* [CP] Embed Pods Frameworks */,
+				D415E68914849A40078B89A6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -4061,6 +4065,8 @@
 				75A2A7A01DA5934300A983D8 /* Sources */,
 				75A2A7A11DA5934300A983D8 /* Frameworks */,
 				75A2A7A21DA5934300A983D8 /* Resources */,
+				34F4279A8C99DB54FF2BFC59 /* [CP] Embed Pods Frameworks */,
+				537A7415CB1192732904A15B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -4080,6 +4086,8 @@
 				75A2A7AB1DA5934300A983D8 /* Sources */,
 				75A2A7AC1DA5934300A983D8 /* Frameworks */,
 				75A2A7AD1DA5934300A983D8 /* Resources */,
+				CBE1A6002B9E7448A14B95A0 /* [CP] Embed Pods Frameworks */,
+				452039A657A151CCBAB96EC0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -4099,6 +4107,7 @@
 				75A2A7B61DA5934300A983D8 /* Resources */,
 				75A2A7DE1DA5934400A983D8 /* Embed App Extensions */,
 				1B54211CD65F63604952C654 /* Frameworks */,
+				AF9DBDB63A9D9C1801655256 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -4119,6 +4128,8 @@
 				75A2A7C41DA5934300A983D8 /* Frameworks */,
 				75A2A7C51DA5934300A983D8 /* Resources */,
 				CED811DF1EB30124003A8D1E /* Embed Frameworks */,
+				30C69A74A8915504B1B38B01 /* [CP] Embed Pods Frameworks */,
+				54E26979C9930DEECF3D3F61 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -4525,7 +4536,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		1B86CEB22091528B00BCE82E /* Icon Versioning */ = {
@@ -4585,7 +4596,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		1D76E36E5B8F6AF0DA0B6121 /* [CP] Check Pods Manifest.lock */ = {
@@ -4603,7 +4614,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2871B83C3AB400C675FAD38C /* [CP] Check Pods Manifest.lock */ = {
@@ -4621,7 +4632,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		30C69A74A8915504B1B38B01 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-loafwallet WatchKit Extension/Pods-loafwallet WatchKit Extension-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		34F4279A8C99DB54FF2BFC59 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-loafwalletTests/Pods-loafwalletTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		3908A4CAFC1EB76364DAD56E /* [CP] Check Pods Manifest.lock */ = {
@@ -4639,7 +4680,67 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		39D64413E88176E0AD7B4D01 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-loafwallet-dev/Pods-loafwallet-dev-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		452039A657A151CCBAB96EC0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-loafwalletUITests/Pods-loafwalletUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		537A7415CB1192732904A15B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-loafwalletTests/Pods-loafwalletTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		54E26979C9930DEECF3D3F61 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-loafwallet WatchKit Extension/Pods-loafwallet WatchKit Extension-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9126BA99543FFAA0490C7102 /* [CP] Embed Pods Frameworks */ = {
@@ -4660,6 +4761,36 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-loafwallet-dev/Pods-loafwallet-dev-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		AF9DBDB63A9D9C1801655256 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-loafwallet WatchKit App/Pods-loafwallet WatchKit App-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CBE1A6002B9E7448A14B95A0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-loafwalletUITests/Pods-loafwalletUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		CEE0EF531EBF8C8A0018DB36 /* Icon Versioning */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4673,6 +4804,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/scripts/icon_versioning.sh\"";
+		};
+		D415E68914849A40078B89A6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-loafwallet/Pods-loafwallet-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		FA7594260CAF7B71C029EB19 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4689,7 +4835,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -5615,7 +5761,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/**",
 					"$(PROJECT_DIR)",
@@ -5645,7 +5791,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/**",
 					"$(PROJECT_DIR)",
@@ -5674,7 +5820,7 @@
 				CODE_SIGN_ENTITLEMENTS = loafwallet/loafwallet.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/**",
 					"$(PROJECT_DIR)",
@@ -5702,7 +5848,7 @@
 				CODE_SIGN_ENTITLEMENTS = loafwallet/loafwallet.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZV7987N2ZC;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/**",
 					"$(PROJECT_DIR)",
